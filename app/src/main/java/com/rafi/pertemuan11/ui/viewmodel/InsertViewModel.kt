@@ -1,5 +1,7 @@
 package com.rafi.pertemuan11.ui.viewmodel
 
+import com.rafi.pertemuan11.model.Mahasiswa
+
 data class InsertUiEvent(
     val nim: String = "",
     val nama: String = "",
@@ -11,4 +13,13 @@ data class InsertUiEvent(
 
 data class InsertUiState(
     val insertUiEvent: InsertUiEvent
+)
+
+fun InsertUiEvent.toMhs(): Mahasiswa = Mahasiswa(
+    nim = nim,
+    nama = nama,
+    alamat = alamat,
+    jenisKelamin = jenisKelamin,
+    kelas = kelas,
+    angkatan = angkatan
 )
