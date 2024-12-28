@@ -37,4 +37,16 @@ class HomeViewModel(
             }
         }
     }
+
+    fun deleteMhs(nim: String){
+        viewModelScope.launch {
+            try {
+                mhs.deleteMahasiswa(nim)
+            } catch (e: IOException){
+                HomeuiState.Error
+            } catch (e: HttpException){
+                HomeuiState.Error
+            }
+        }
+    }
 }
