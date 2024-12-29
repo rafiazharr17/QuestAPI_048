@@ -16,7 +16,7 @@ class InsertViewModel(
         private set
 
     fun updateInsertMhsState(insertUiEvent: InsertUiEvent){
-        uiState = InsertUiState(insertUiEvent = InsertUiEvent())
+        uiState = InsertUiState(insertUiEvent = insertUiEvent)
     }
 
     suspend fun insertMhs(){
@@ -28,8 +28,6 @@ class InsertViewModel(
             }
         }
     }
-
-
 }
 
 data class InsertUiEvent(
