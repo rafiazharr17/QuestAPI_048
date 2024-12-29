@@ -25,6 +25,10 @@ class HomeViewModel(
     var mhsUiState: HomeuiState by mutableStateOf(HomeuiState.Loading)
         private set
 
+    init {
+        getMhs()
+    }
+
     fun getMhs(){
         viewModelScope.launch {
             mhsUiState = HomeuiState.Loading
