@@ -3,10 +3,12 @@ package com.rafi.pertemuan11.ui.view
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -30,10 +32,42 @@ import androidx.compose.ui.unit.dp
 import com.rafi.pertemuan11.R
 import com.rafi.pertemuan11.model.Mahasiswa
 import com.rafi.pertemuan11.ui.navigation.DestinasiNavigasi
+import com.rafi.pertemuan11.ui.viewmodel.HomeuiState
 
 object DestinasiHome : DestinasiNavigasi {
     override val route = "home"
     override val titleRes = "Home Mhs"
+}
+
+@Composable
+fun HomeStatus(
+    homeUiState: HomeuiState,
+    retryAction: () -> Unit,
+    modifier: Modifier = Modifier,
+    onDetailClick: (String) -> Unit,
+    onDeleteClick: (Mahasiswa) -> Unit = {},
+){
+    when (homeUiState) {
+        is HomeuiState.Loading -> OnLoading(modifier = modifier.fillMaxSize())
+        is HomeuiState.Success ->
+            if (homeUiState.mahasiswa.isEmpty()) {
+                return Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    Text(text = "Tidak ada data Kontak")
+                }
+            } else {
+                MhsLayout(
+                    mahasiswa = homeUiState.mahasiswa,
+                    modifier = modifier.fillMaxWidth(),
+                    onDetailClick = {
+                        onDetailClick(it.nim)
+                    },
+                    onDeleteClick = {
+                        onDeleteClick(it)
+                    }
+                )
+            }
+        is HomeuiState.Error -> OnError(retryAction, modifier = modifier.fillMaxSize())
+    }
 }
 
 @Composable
