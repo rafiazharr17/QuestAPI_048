@@ -13,9 +13,11 @@ import androidx.navigation.navArgument
 import com.rafi.pertemuan11.ui.view.DestinasiDetail
 import com.rafi.pertemuan11.ui.view.DestinasiEntry
 import com.rafi.pertemuan11.ui.view.DestinasiHome
+import com.rafi.pertemuan11.ui.view.DestinasiUpdate
 import com.rafi.pertemuan11.ui.view.DetailScreen
 import com.rafi.pertemuan11.ui.view.EntryMhsScreen
 import com.rafi.pertemuan11.ui.view.HomeScreen
+import com.rafi.pertemuan11.ui.view.UpdateScreen
 
 @Composable
 fun PengelolaHalaman(
@@ -67,7 +69,30 @@ fun PengelolaHalaman(
                             }
                         }
                     },
-                    navigateToItemUpdate = {}
+                    navigateToItemUpdate = {
+                        navController.navigate("${DestinasiUpdate.route}/$nim")
+                    }
+                )
+            }
+        }
+
+        composable(
+            DestinasiUpdate.routeWithArg,
+            arguments = listOf(
+                navArgument(DestinasiDetail.NIM){
+                    type = NavType.StringType
+                }
+            )
+        ){
+            val nim = it.arguments?.getString(DestinasiUpdate.NIM)
+            nim?.let { nim ->
+                UpdateScreen(
+                    onBack = {
+                        navController.popBackStack()
+                    },
+                    onNavigate = {
+                        navController.popBackStack()
+                    }
                 )
             }
         }
