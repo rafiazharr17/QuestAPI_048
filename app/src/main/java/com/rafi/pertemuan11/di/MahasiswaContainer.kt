@@ -20,7 +20,7 @@ class MahasiswaContainer: AppContainer{
         .baseUrl(baseUrl).build()
 
     private val mahasiswaService: MahasiswaService by lazy {
-        retrofit.create(mahasiswaService::class.java)
+        retrofit.create(MahasiswaService::class.java)
     }
 
     override val kontakRepository: MahasiswaRepository by lazy {
