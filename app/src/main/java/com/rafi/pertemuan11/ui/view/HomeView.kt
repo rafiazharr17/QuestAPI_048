@@ -37,6 +37,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -267,9 +268,16 @@ private fun DeleteConfirmationDialog (
             }
         },
         confirmButton = {
-            TextButton(onClick = onDeleteConfirm) {
-                Text(text = "Yes")
+            Card(
+                colors = CardDefaults.cardColors(
+                    containerColor = Color.Red
+                )
+            ) {
+                TextButton(onClick = onDeleteConfirm) {
+                    Text(text = "Yes", color = Color.White)
+                }
             }
+
         }
     )
 }
